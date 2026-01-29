@@ -1,23 +1,34 @@
 import java.util.*;
-import java.io.*;
-public class game
+
+public class game 
 {
     public static void main(String[] args)
     {
-        ArrayList<ArrayList<card>> cards = new ArrayList<>();
-        Stack<Integer> cardlist = new Stack<>();
-        // Adds numbers 1 to 52 in the stack. Card types can be determined in whatever way, following suit of 13s.
-        for(int x=0;x<52;x++)
+        Stack<card> deck = new Stack<card>();
+        String[] suits = new String[4];
+        suits[0] = "Hearts";
+        suits[1] = "Diamonds";
+        suits[2] = "Spades";
+        suits[3] = "Clubs";
+        ArrayList<String> cardidentification = new ArrayList<>();
+        for (int lcv = 0;lcv < 52;lcv ++)
         {
-            int temp = (int)(Math.random()*52+1);
-            if(cardlist.contains(temp))
+            int temp = (int)((Math.random() * 13) + 1);
+            String temp2 = suits[(int)(Math.random() * 4)];
+            card x = new card(temp2,temp);
+            while(cardidentification.contains(temp2+temp))
             {
-                while(cardlist.contains(temp))
-                {
-                    temp = (int)(Math.random()*52+1);
-                }
+                temp = (int)((Math.random() * 13) + 1);
+                temp2 = suits[(int)(Math.random() * 4)];
+                x = new card(temp2,temp);
             }
-            cardlist.add(temp);
+            deck.push(x);
+            cardidentification.add(temp2+temp);
+        }
+        while (!deck.empty())
+        {
+            card x = deck.pop();
+            System.out.println(x.getnum()+" of "+x.gettype());
         }
     }
 }
