@@ -25,10 +25,28 @@ public class game
             deck.push(x);
             cardidentification.add(temp2+temp);
         }
-        while (!deck.empty())
+        
+        Stack<card> Discard = new Stack<card>();
+        ArrayList<Stack<card>> piles = new ArrayList<>();
+        Stack<card> pile1 = new Stack<card>();
+        pile1.push(deck.pop());
+        piles.add((pile1));
+        for (int lcv = 1;lcv < 7;lcv ++)
         {
-            card x = deck.pop();
-            System.out.println(x.getnum()+" of "+x.gettype());
+            Stack<card> temp = new Stack<card>();
+            for (int lcv2 = 0;lcv2 < lcv;lcv2++)
+            {
+                temp.push(deck.pop());
+            }
+            piles.add(temp);
         }
+
+        // for (int lcv = 0;lcv < piles.size();lcv ++)
+        // {
+        //     for (card x:piles.get(lcv))
+        //     {
+        //         System.out.println(x.getnum() + " " +  x.gettype());
+        //     }
+        // }
     }
 }
