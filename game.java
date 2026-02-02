@@ -25,10 +25,38 @@ public class game
             deck.push(x);
             cardidentification.add(temp2+temp);
         }
-        while (!deck.empty())
+        
+        Stack<card> Discard = new Stack<>();
+        ArrayList<Stack<card>> piles = new ArrayList<>();
+        Stack<card> pile1 = new Stack<card>();
+        pile1.push(deck.pop());
+        piles.add((pile1));
+        for (int lcv = 1;lcv < 7;lcv ++)
         {
-            card x = deck.pop();
-            System.out.println(x.getnum()+" of "+x.gettype());
+            Stack<card> temp = new Stack<card>();
+            for (int lcv2 = 0;lcv2 < lcv;lcv2++)
+            {
+                temp.push(deck.pop());
+            }
+            piles.add(temp);
         }
+        for(int x=0;x<100;x++)
+        {
+            if(deck.size()>0)
+            {
+                Discard = pickUpCard(deck.pop(), Discard);
+            }
+            else
+            {
+                System.out.println("There are no more cards in the deck!");
+                break;
+            }
+        }
+    }
+    public static Stack<card> pickUpCard(card x, Stack<card> y)
+    {
+        y.push(x);
+        System.out.println("Top card on discard pile is now a "+x.getnum()+" of "+x.gettype());
+        return y;
     }
 }
