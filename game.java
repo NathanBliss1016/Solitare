@@ -26,7 +26,7 @@ public class game
             cardidentification.add(temp2+temp);
         }
         
-        Stack<card> Discard = new Stack<>();
+        Stack<card> Discard = new Stack<card>();
         ArrayList<Stack<card>> piles = new ArrayList<>();
         Stack<card> pile1 = new Stack<card>();
         pile1.push(deck.pop());
@@ -40,18 +40,14 @@ public class game
             }
             piles.add(temp);
         }
-        for(int x=0;x<100;x++)
-        {
-            if(deck.size()>0)
-            {
-                Discard = pickUpCard(deck.pop(), Discard);
-            }
-            else
-            {
-                System.out.println("There are no more cards in the deck!");
-                break;
-            }
-        }
+
+        // for (int lcv = 0;lcv < piles.size();lcv ++)
+        // {
+        //     for (card x:piles.get(lcv))
+        //     {
+        //         System.out.println(x.getnum() + " " +  x.gettype());
+        //     }
+        // }
     }
     public static Stack<card> pickUpCard(card x, Stack<card> y)
     {
