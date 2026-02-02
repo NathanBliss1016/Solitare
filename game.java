@@ -49,4 +49,10 @@ public class game
         //     }
         // }
     }
+    public static Stack<card> pickUpCard(card x, Stack<card> y)
+    {
+        y.push(x);
+        System.out.println("Top card on discard pile is now a "+x.getnum()+" of "+x.gettype());
+        return y;
+    }
 }
