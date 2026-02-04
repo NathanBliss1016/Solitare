@@ -48,11 +48,53 @@ public class game
         //         System.out.println(x.getnum() + " " +  x.gettype());
         //     }
         // }
+
+        Stack<card> Hearts = new Stack<card>();
+        Stack<card> Diamonds = new Stack<card>();
+        Stack<card> Clubs = new Stack<card>();
+        Stack<card> Spades = new Stack<card>();
+
+        Scanner input = new Scanner(System.in);
+        while (true)
+        {
+            System.out.println("Enter Move (Draw = D, Move = M): ");
+            String ans = input.next();
+            while (true)
+            {
+                if (ans.toUpperCase().equals("D") || ans.toUpperCase().equals("M"))
+                {
+                    break;
+                }
+                else
+                {
+                    System.out.println("Enter Move (Draw = D, Move = M): ");
+                    ans = input.next();
+                }
+            }
+            if (ans.toUpperCase().equals("D"))
+            {
+                Discard.push(pickUpCard(deck));
+            }
+            else
+            {
+                System.out.println("Enter Where Your Getting The Card From (D = Discard, 1-7 (IN WORDS!) = Piles): ");
+                String pos = input.next();
+                if (pos.toUpperCase().equals("D"))
+                {
+                    card x = Discard.pop();
+                    
+                }
+                else
+                {
+
+                }
+            }
+        }
     }
-    public static Stack<card> pickUpCard(card x, Stack<card> y)
+    public static card pickUpCard(Stack<card> deck)
     {
-        y.push(x);
+        card x = deck.pop();
         System.out.println("Top card on discard pile is now a "+x.getnum()+" of "+x.gettype());
-        return y;
+        return x;
     }
 }
