@@ -27,7 +27,7 @@ public class game
         }
         
         Stack<card> Discard = new Stack<card>();
-        ArrayList<Stack<card>> piles = new ArrayList<>();
+        ArrayList<Stack<card>> piles = new ArrayList<Stack<card>>();
         Stack<card> pile1 = new Stack<card>();
         pile1.push(deck.pop());
         piles.add((pile1));
@@ -54,20 +54,34 @@ public class game
         Stack<card> Clubs = new Stack<card>();
         Stack<card> Spades = new Stack<card>();
 
+        //Below is the controls please be careful what you do (if any function requirements are changed make sure to change them here)
+
         Scanner input = new Scanner(System.in);
         while (true)
         {
-            System.out.println("Enter Move (Draw = D, Move = M): ");
+            //Proper printing is needed still to display the piles (Edit the current printing as needed to make it work)
+            //  for (int lcv = 0;lcv < piles.size();lcv ++)
+            //  {
+            //      for (card x:piles.get(lcv))
+            //      {
+            //          System.out.println(x.getnum() + " " +  x.gettype());
+            //      }
+            //  }
+            System.out.println("Enter Move (Draw = D, Move = M, Quit = Q): ");
             String ans = input.next();
+            if (ans.toUpperCase().equals("Q"))
+            {
+                break;
+            }
             while (true)
             {
-                if (ans.toUpperCase().equals("D") || ans.toUpperCase().equals("M"))
+                if (ans.toUpperCase().equals("D") || ans.toUpperCase().equals("M") || ans.toUpperCase().equals("Q"))
                 {
                     break;
                 }
                 else
                 {
-                    System.out.println("Enter Move (Draw = D, Move = M): ");
+                    System.out.println("Enter Move (Draw = D, Move = M, Quit = Q): ");
                     ans = input.next();
                 }
             }
@@ -77,16 +91,99 @@ public class game
             }
             else
             {
-                System.out.println("Enter Where Your Getting The Card From (D = Discard, 1-7 (IN WORDS!) = Piles): ");
-                String pos = input.next();
-                if (pos.toUpperCase().equals("D"))
+                if (ans.toUpperCase().equals("Q"))
+                {
+                    System.exit(0);
+                }
+                System.out.println("Enter Where Your Getting The Card From (0 = Discard, 1-7 = Piles): ");
+                int pos = input.nextInt();
+                while (true)
+                {
+                    if (pos >= 0 && pos <=7)
+                    {
+                        break;
+                    }
+                    else
+                    {
+                        System.out.println("Enter Where Your Getting The Card From (0 = Discard, 1-7 = Piles): ");
+                        pos = input.nextInt();
+                    }
+                }
+                if (pos == 0)
                 {
                     card x = Discard.pop();
-                    
+                    System.out.println("Enter Where Your Placing The Card (1-7 = Piles, 8 = Hearts, 9 = Diamonds, 10 = Clubs, 11 = Spades): ");
+                    int pos2 = input.nextInt();
+                    while (true)
+                    {
+                        if (pos2 >= 1 && pos2 <= 11)
+                        {
+                            break;
+                        }
+                        else
+                        {
+                            System.out.println("Enter Where Your Placing The Card (1-7 = Piles, 8 = Hearts, 9 = Diamonds, 10 = Clubs, 11 = Spades): ");
+                            pos2 = input.nextInt();
+                        }
+                    }
+                    if (pos2 >= 1 && pos2 <= 7)
+                    {
+                        piles.set(pos2 - 1, insert(x,piles.get(pos2 - 1)));
+                    }
+                    if (pos2 == 8)
+                    {
+                        Hearts = insert(x, Hearts);
+                    }
+                    if (pos2 == 9)
+                    {
+                        Diamonds = insert(x, Diamonds);
+                    }
+                    if (pos2 == 10)
+                    {
+                        Clubs = insert(x, Clubs);
+                    }
+                    if (pos2 == 11)
+                    {
+                        Spades = insert(x, Spades);
+                    }
                 }
                 else
                 {
-
+                    card x = piles.get(pos - 1).pop();
+                    System.out.println("Enter Where Your Placing The Card (1-7 = Piles, 8 = Hearts, 9 = Diamonds, 10 = Clubs, 11 = Spades): ");
+                    int pos2 = input.nextInt();
+                    while (true)
+                    {
+                        if (pos2 >= 1 && pos2 <= 11)
+                        {
+                            break;
+                        }
+                        else
+                        {
+                            System.out.println("Enter Where Your Placing The Card (1-7 = Piles, 8 = Hearts, 9 = Diamonds, 10 = Clubs, 11 = Spades): ");
+                            pos2 = input.nextInt();
+                        }
+                    }
+                    if (pos2 >= 1 && pos2 <= 7)
+                    {
+                        piles.set(pos2 - 1, insert(x,piles.get(pos2 - 1)));
+                    }
+                    if (pos2 == 8)
+                    {
+                        Hearts = insert(x, Hearts);
+                    }
+                    if (pos2 == 9)
+                    {
+                        Diamonds = insert(x, Diamonds);
+                    }
+                    if (pos2 == 10)
+                    {
+                        Clubs = insert(x, Clubs);
+                    }
+                    if (pos2 == 11)
+                    {
+                        Spades = insert(x, Spades);
+                    }
                 }
             }
         }
@@ -96,5 +193,16 @@ public class game
         card x = deck.pop();
         System.out.println("Top card on discard pile is now a "+x.getnum()+" of "+x.gettype());
         return x;
+    }
+    //Use this to insert a card into the position requested (only change requirements if needed)
+    public static Stack<card> insert(card x, Stack<card> place)
+    {
+        isLegal(x,place);
+        return null;
+    }
+    //Use this in insert to make sure the move is valid (only chnage requirements if needed)
+    public static boolean isLegal(card x, Stack<card> place)
+    {
+        return false;
     }
 }
