@@ -221,6 +221,14 @@ public class game
                 return true;
             }
         }
+    public static Stack<card> insert(card x, Stack<card> place)
+    {
+        isLegal(x,place);
+        return null;
+    }
+    //Use this in insert to make sure the move is valid (only chnage requirements if needed)
+    public static boolean isLegal(card x, Stack<card> place)
+    {
         return false;
     }
 }
