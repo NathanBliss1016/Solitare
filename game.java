@@ -126,6 +126,8 @@ public class game
                             pos2 = input.nextInt();
                         }
                     }
+                    // for all "insert" commands, the *grabbing* stack followed by the *destination* stack is needed.
+                    // Currently needed: The ability to grab any card in the stack rather than the top card.
                     if (pos2 >= 1 && pos2 <= 7)
                     {
                         piles.set(pos2 - 1, insert(x,piles.get(pos2 - 1)));
@@ -195,6 +197,30 @@ public class game
         return x;
     }
     //Use this to insert a card into the position requested (only change requirements if needed)
+    public static Stack<card> insert(Stack<card> placing, Stack<card> goto)
+    {
+        Iterator i = placing.iterator();
+        card c;
+        while(i.hasNext())
+        {
+            c=i.next();
+        }
+        boolean cando = isLegal(c,goto);
+        if(cando)
+        {
+            goto.push(placing);
+        }
+        return goto;
+    }
+    public static boolean isLegal(card x, Stack<card> place)
+    {
+        if(((place.peek().gettype().equals("Spades")||place.peek().gettype().equals("Clubs")) && (x.gettype().equals("Hearts")||x.gettype().equals("Diamonds")))||((place.peek().gettype().equals("Diamonds")||place.peek().gettype().equals("Hearts")) && (x.gettype().equals("Spades")||x.gettype().equals("Clubs"))))
+        { // check if the card below is the opposite color ^
+            if(place.peek().getnum()==x.getnum()-1) // check if card below is the placing card's number minus 1
+            { 
+                return true;
+            }
+        }
     public static Stack<card> insert(card x, Stack<card> place)
     {
         isLegal(x,place);
