@@ -138,7 +138,7 @@ public class game
                         // Add (using .pop()) all items to the array list from the selected stack up until the selected amount.
                         // After that, use a reverse loop to add those to a new stack.
                         // Finally, add that stack to the new stack via logic gates.
-                        if(pos3>0 && post3<=stacknumbervariablename.size())
+                        if(pos3>0 && pos3<=stacknumbervariablename.size())
                         for(int y=0;y<pos3;y++)
                         {
                             temp.add(stacknumbervariablename.pop());
@@ -217,7 +217,7 @@ public class game
     public static Stack<card> insert(Stack<card> placing, Stack<card> gotoo)
     {
         Iterator<card> i = placing.iterator();
-        card c;
+        card c = null;
         while(i.hasNext())
         {
             c=i.next();
@@ -238,14 +238,11 @@ public class game
                 return true;
             }
         }
+        return false;
+    }
     public static Stack<card> insert(card x, Stack<card> place)
     {
         isLegal(x,place);
         return null;
-    }
-    //Use this in insert to make sure the move is valid (only chnage requirements if needed)
-    public static boolean isLegal(card x, Stack<card> place)
-    {
-        return false;
     }
 }
