@@ -130,6 +130,23 @@ public class game
                     // Currently needed: The ability to grab any card in the stack rather than the top card.
                     if (pos2 >= 1 && pos2 <= 7)
                     {
+                        System.out.println("Enter where you are cutting the pile from. 1=top card, pile size=bottom card.");
+                        System.out.println("If you enter a number <1, >pileSize, or you grab a hidden card, your move will be invalidated.");
+                        int pos3 = input.nextInt();
+                        ArrayList<card> temp = new ArrayList<>();
+                        Stack<card> temp2 = new Stack<>();
+                        // Add (using .pop()) all items to the array list from the selected stack up until the selected amount.
+                        // After that, use a reverse loop to add those to a new stack.
+                        // Finally, add that stack to the new stack via logic gates.
+                        if(pos3>0 && post3<=stacknumbervariablename.size())
+                        for(int y=0;y<pos3;y++)
+                        {
+                            temp.add(stacknumbervariablename.pop());
+                        }
+                        for(int z=temp.size();z>0;z--)
+                        {
+                            temp2.add(temp.get(z));
+                        }
                         piles.set(pos2 - 1, insert(x,piles.get(pos2 - 1)));
                     }
                     if (pos2 == 8)
