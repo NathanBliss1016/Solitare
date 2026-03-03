@@ -1,5 +1,4 @@
 import java.util.*;
-
 public class game 
 {
     public static void main(String[] args)
@@ -41,13 +40,14 @@ public class game
             piles.add(temp);
         }
 
-        // for (int lcv = 0;lcv < piles.size();lcv ++)
-        // {
-        //     for (card x:piles.get(lcv))
-        //     {
-        //         System.out.println(x.getnum() + " " +  x.gettype());
-        //     }
-        // }
+        // board printing
+        /*for (int lcv = 0;lcv < piles.size();lcv ++)
+        {
+            for (card x:piles.get(lcv))
+            {
+                System.out.println(x.getnum() + " " +  x.gettype());
+            }
+        }*/
 
         Stack<card> Hearts = new Stack<card>();
         Stack<card> Diamonds = new Stack<card>();
@@ -67,6 +67,7 @@ public class game
             //          System.out.println(x.getnum() + " " +  x.gettype());
             //      }
             //  }
+            printBoard(piles);
             System.out.println("Enter Move (Draw = D, Move = M, Quit = Q): ");
             String ans = input.next();
             if (ans.toUpperCase().equals("Q"))
@@ -111,7 +112,8 @@ public class game
                 }
                 if (pos == 0)
                 {
-                    card x = Discard.pop();
+                    Stack<card> x = new Stack<>();
+                    x.add(Discard.pop());
                     System.out.println("Enter Where Your Placing The Card (1-7 = Piles, 8 = Hearts, 9 = Diamonds, 10 = Clubs, 11 = Spades): ");
                     int pos2 = input.nextInt();
                     while (true)
@@ -138,10 +140,10 @@ public class game
                         // Add (using .pop()) all items to the array list from the selected stack up until the selected amount.
                         // After that, use a reverse loop to add those to a new stack.
                         // Finally, add that stack to the new stack via logic gates.
-                        if(pos3>0 && pos3<=stacknumbervariablename.size())
+                        if(pos3>0 && pos3<=piles.get(pos3).size())
                         for(int y=0;y<pos3;y++)
                         {
-                            temp.add(stacknumbervariablename.pop());
+                            temp.add(piles.get(pos3).pop());
                         }
                         for(int z=temp.size();z>0;z--)
                         {
@@ -168,7 +170,8 @@ public class game
                 }
                 else
                 {
-                    card x = piles.get(pos - 1).pop();
+                    Stack<card> x = new Stack<>();
+                    x.add(piles.get(pos - 1).pop());
                     System.out.println("Enter Where Your Placing The Card (1-7 = Piles, 8 = Hearts, 9 = Diamonds, 10 = Clubs, 11 = Spades): ");
                     int pos2 = input.nextInt();
                     while (true)
@@ -206,7 +209,8 @@ public class game
                 }
             }
         }
-    }
+        input.close();
+        }
     public static card pickUpCard(Stack<card> deck)
     {
         card x = deck.pop();
@@ -214,10 +218,10 @@ public class game
         return x;
     }
     //Use this to insert a card into the position requested (only change requirements if needed)
-    public static Stack<card> insert(Stack<card> placing, Stack<card> gotoo)
+    public static Stack<card> insert(Stack<card> placing, Stack<card> gotoo) // needs applied logic for if ur adding to the main piles or the counting piles
     {
         Iterator<card> i = placing.iterator();
-        card c = null;
+        card c = i.next();
         while(i.hasNext())
         {
             c=i.next();
@@ -240,9 +244,25 @@ public class game
         }
         return false;
     }
-    public static Stack<card> insert(card x, Stack<card> place)
+    public static void printBoard(ArrayList<Stack<card>> piles)
     {
-        isLegal(x,place);
-        return null;
+        for(int r = 0; r < 20; r++)
+        {
+            for(int c=0;c<piles.size();c++)
+            {
+                if(r<piles.get(c).size()-1)
+                {
+                    System.out.print("[Hidden]     ");
+                }
+                else if (r == piles.get(c).size()-1)
+                {
+                    card tmp = piles.get(c).get(r);
+                    System.out.print(tmp.getnum()+" of "+tmp.gettype()+ "   ");
+                } else {
+                    System.out.print("             ");
+                }
+            }
+            System.out.println();
     }
+}
 }
