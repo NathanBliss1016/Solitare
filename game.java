@@ -1,5 +1,4 @@
 import java.util.*;
-
 public class game 
 {
     public static void main(String[] args)
@@ -49,25 +48,6 @@ public class game
                 System.out.println(x.getnum() + " " +  x.gettype());
             }
         }*/
-       
-        for(int r = 0; r < 20; r++)
-        {
-            for(int c=0;c<piles.size();c++)
-            {
-                if(r<piles.get(c).size()-1)
-                {
-                    System.out.print("[Hidden]     ");
-                }
-                else if (r == piles.get(c).size()-1)
-                {
-                    card tmp = piles.get(c).get(r);
-                    System.out.print(tmp.getnum()+" of "+tmp.gettype()+ "   ");
-                } else {
-                    System.out.print("             ");
-                }
-            }
-            System.out.println();
-       }
 
         Stack<card> Hearts = new Stack<card>();
         Stack<card> Diamonds = new Stack<card>();
@@ -87,6 +67,7 @@ public class game
             //          System.out.println(x.getnum() + " " +  x.gettype());
             //      }
             //  }
+            printBoard(piles);
             System.out.println("Enter Move (Draw = D, Move = M, Quit = Q): ");
             String ans = input.next();
             if (ans.toUpperCase().equals("Q"))
@@ -229,7 +210,7 @@ public class game
             }
         }
         input.close();
-    }
+        }
     public static card pickUpCard(Stack<card> deck)
     {
         card x = deck.pop();
@@ -237,7 +218,7 @@ public class game
         return x;
     }
     //Use this to insert a card into the position requested (only change requirements if needed)
-    public static Stack<card> insert(Stack<card> placing, Stack<card> gotoo)
+    public static Stack<card> insert(Stack<card> placing, Stack<card> gotoo) // needs applied logic for if ur adding to the main piles or the counting piles
     {
         Iterator<card> i = placing.iterator();
         card c = i.next();
@@ -263,4 +244,25 @@ public class game
         }
         return false;
     }
+    public static void printBoard(ArrayList<Stack<card>> piles)
+    {
+        for(int r = 0; r < 20; r++)
+        {
+            for(int c=0;c<piles.size();c++)
+            {
+                if(r<piles.get(c).size()-1)
+                {
+                    System.out.print("[Hidden]     ");
+                }
+                else if (r == piles.get(c).size()-1)
+                {
+                    card tmp = piles.get(c).get(r);
+                    System.out.print(tmp.getnum()+" of "+tmp.gettype()+ "   ");
+                } else {
+                    System.out.print("             ");
+                }
+            }
+            System.out.println();
+    }
+}
 }
